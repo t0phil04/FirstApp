@@ -39,6 +39,9 @@ namespace FirstApp {
 	private: System::Windows::Forms::Label^ lbMediumMode;
 	private: System::Windows::Forms::Label^ lbHardMode;
 	private: System::Windows::Forms::TextBox^ txtbxDifficultyAnswer;
+	private: System::Windows::Forms::Button^ btDifficultySelectorReset;
+
+
 
 	protected:
 
@@ -60,6 +63,7 @@ namespace FirstApp {
 			this->lbMediumMode = (gcnew System::Windows::Forms::Label());
 			this->lbHardMode = (gcnew System::Windows::Forms::Label());
 			this->txtbxDifficultyAnswer = (gcnew System::Windows::Forms::TextBox());
+			this->btDifficultySelectorReset = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// lbDifficultyText
@@ -117,11 +121,24 @@ namespace FirstApp {
 			this->txtbxDifficultyAnswer->TabIndex = 4;
 			this->txtbxDifficultyAnswer->TextChanged += gcnew System::EventHandler(this, &DifficultyForm::txtbxDifficultyAnswer_TextChanged);
 			// 
+			// btDifficultySelectorReset
+			// 
+			this->btDifficultySelectorReset->Font = (gcnew System::Drawing::Font(L"Rockwell", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btDifficultySelectorReset->Location = System::Drawing::Point(234, 244);
+			this->btDifficultySelectorReset->Name = L"btDifficultySelectorReset";
+			this->btDifficultySelectorReset->Size = System::Drawing::Size(105, 37);
+			this->btDifficultySelectorReset->TabIndex = 5;
+			this->btDifficultySelectorReset->Text = L"Reset Entry";
+			this->btDifficultySelectorReset->UseVisualStyleBackColor = true;
+			this->btDifficultySelectorReset->Click += gcnew System::EventHandler(this, &DifficultyForm::btDifficultySelectorReset_Click);
+			// 
 			// DifficultyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(656, 360);
+			this->Controls->Add(this->btDifficultySelectorReset);
 			this->Controls->Add(this->txtbxDifficultyAnswer);
 			this->Controls->Add(this->lbHardMode);
 			this->Controls->Add(this->lbMediumMode);
@@ -134,36 +151,45 @@ namespace FirstApp {
 
 		}
 #pragma endregion
-	private: System::Void txtbxDifficultyAnswer_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-		// Event handler for TextChanged event of the TextBox
+		// Declare a flag to track whether the text is intentionally cleared
+private:
+	bool isTextCleared = false;
 
-		// You can add validation if needed
-		String^ inputText = txtbxDifficultyAnswer->Text; // = text box name->Text
+    private: System::Void txtbxDifficultyAnswer_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+    	// Event handler for TextChanged event of the TextBox
+    
+    	// You can add validation if needed
+    	String^ inputText = txtbxDifficultyAnswer->Text;
+    
+    	// Check if the text is not empty and not intentionally cleared
+    	if (!String::IsNullOrEmpty(inputText) && !isTextCleared) {
+    		int difficulty = -1;
+    		if (Int32::TryParse(inputText, difficulty)) {
+    			// Conversion successful
+    			if (difficulty >= 1 && difficulty <= 3) {
+    				// Valid difficulty range
+    				// Example: Set a label to provide feedback
+    				System::Windows::Forms::MessageBox::Show("Difficulty Selected: " + difficulty, "Difficulty Selected", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    			}
+    			else {
+    				// Invalid difficulty range
+    				// Example: Set a label to provide feedback
+    				System::Windows::Forms::MessageBox::Show("Invalid difficulty. Please enter a value between 1 and 3.", "ERROR", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    			}
+    		}
+    		else {
+    			// Conversion failed
+    			// Example: Set a label to provide feedback
+    			System::Windows::Forms::MessageBox::Show("Invalid input. Please enter a numeric value.", "ERROR", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    		}
+    	}
+    }
 
-		int difficulty = -1;
-		if (Int32::TryParse(inputText, difficulty)) {
-			// Conversion successful
-			// Handle the logic based on the difficulty
-			if (difficulty >= 1 && difficulty <= 3) {
-				// Valid difficulty range
-				// Example: Set a label to provide feedback
-				System::Windows::Forms::MessageBox::Show("Difficulty Selected: " + difficulty, "Difficulty Selected", MessageBoxButtons::OK, MessageBoxIcon::Information);
-				
-			}
-			else {
-				// Invalid difficulty range
-				// Example: Set a label to provide feedback
-				System::Windows::Forms::MessageBox::Show("Invalid difficulty. Please enter a value between 1 and 3.", "ERROR", MessageBoxButtons::OK, MessageBoxIcon::Information);
-			
-			}
-		}
-		else {
-			// Conversion failed
-			// Example: Set a label to provide feedback
-			System::Windows::Forms::MessageBox::Show("Invalid input. Please enter a numeric value.", "ERROR", MessageBoxButtons::OK, MessageBoxIcon::Information);
-			
-		}
-	}
+    private: System::Void btDifficultySelectorReset_Click(System::Object^ sender, System::EventArgs^ e) {
+    	isTextCleared = true;  // Set the flag to indicate intentional clearing
+    	this->txtbxDifficultyAnswer->Text = "";  // Set the Text property to an empty string
+    	isTextCleared = false;  // Reset the flag after clearing the text
+    }
 
 };
 }
