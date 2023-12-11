@@ -156,7 +156,7 @@ namespace FirstApp {
 	}
 
 
-	private: int selectedDifficulty = -1;
+
 	private: System::Void btDifficultySelector_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Create an instance of DifficultyForm
 		DifficultyForm^ difficultyForm = gcnew DifficultyForm();
@@ -164,31 +164,21 @@ namespace FirstApp {
 		// Show the DifficultyForm as a dialog (waits for it to be closed before continuing)
 		System::Windows::Forms::DialogResult result = difficultyForm->ShowDialog();
 
-		// Check the result of the DifficultyForm
-		if (result == System::Windows::Forms::DialogResult::OK) {
-			// Set the selected difficulty from DifficultyForm
-			selectedDifficulty = difficultyForm->GetSelectedDifficulty();
-		}
-		difficultyForm->Close(); // Makes sure that the form closes when you close the window
 	}
 
 
 	private: System::Void btStartGame_Click(System::Object^ sender, System::EventArgs^ e) {
 			
-		int selectedDifficulty = DifficultyForm::GetSelectedDifficulty();
-			
-		if (selectedDifficulty != -1)
-		{
+			int selectedDifficulty = DifficultyForm::GetSelectedDifficulty();
+
 			// Easy difficulty
 			if (selectedDifficulty == 1) {
 				// Create an instance of StartGameForm
 				EasyMode^ easyForm = gcnew EasyMode();
-				easyForm->Show(); // Show the EasyMode Form
+				easyForm->Show();
+				
 
-
-				//wait_for_enter();
-				//clear();
-				//easy_mode();
+				
 			}
 			/*
 			else if (selectedDifficulty == 2) {
@@ -206,8 +196,6 @@ namespace FirstApp {
 				hard_mode();
 			}
 			*/
-		}
-			
 	}
 
 	};

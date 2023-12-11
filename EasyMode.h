@@ -1,33 +1,4 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <vector>
-#include <ctime>
-#include <cstdlib>
-#include "QuestionsFunctions.h"
-#include <random>
-#include <algorithm>
-#include <unordered_map>
-
-
-using std::vector; using std::string;
-/*
-int answer = -1;
-bool is_answer_correct = false;
-int category_count = 3;
-int category_chosen_count = 0;
-int categories_chosen[3] = { 1, 2, 3 };
-// **** Answers for Categories *****
-vector<int> correct_answer_movies = { 1, 1, 2, 3, 2, 4, 3, 1, 3, 2 };
-vector<int> correct_answer_science = { 2, 4, 1, 4, 1, 3, 1, 3, 1, 1 };
-vector<int> correct_answer_history = { 2, 2, 2, 3, 2, 2, 2, 3, 3, 2 };
-/ *********************************
-vector<vector<string>> current_bank;
-*/
-static std::random_device randomizer;
-static std::mt19937 g(randomizer());
-
-//bool should_quit = false;
 
 namespace FirstApp {
 
@@ -51,8 +22,6 @@ namespace FirstApp {
 			//TODO: Add the constructor code here
 			//
 		}
-		
-
 
 	protected:
 		/// <summary>
@@ -75,11 +44,6 @@ namespace FirstApp {
 	private: System::Windows::Forms::Label^ lbCategoryChooser;
 	private: System::Windows::Forms::TextBox^ txtbxCategoryChooser;
 	private: System::Windows::Forms::Button^ btEnter;
-	private: System::Windows::Forms::Label^ lbMovies;
-	private: System::Windows::Forms::Label^ lbScience;
-	private: System::Windows::Forms::Label^ lbHistory;
-	private: System::Windows::Forms::Label^ lbQuit;
-
 
 
 
@@ -105,10 +69,6 @@ namespace FirstApp {
 			this->lbCategoryChooser = (gcnew System::Windows::Forms::Label());
 			this->txtbxCategoryChooser = (gcnew System::Windows::Forms::TextBox());
 			this->btEnter = (gcnew System::Windows::Forms::Button());
-			this->lbMovies = (gcnew System::Windows::Forms::Label());
-			this->lbScience = (gcnew System::Windows::Forms::Label());
-			this->lbHistory = (gcnew System::Windows::Forms::Label());
-			this->lbQuit = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// lbQuestion
@@ -210,65 +170,12 @@ namespace FirstApp {
 			this->btEnter->TabIndex = 8;
 			this->btEnter->Text = L"Enter";
 			this->btEnter->UseVisualStyleBackColor = false;
-			this->btEnter->Click += gcnew System::EventHandler(this, &EasyMode::btEnter_Click);
-			// 
-			// lbMovies
-			// 
-			this->lbMovies->AutoSize = true;
-			this->lbMovies->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->lbMovies->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lbMovies->Location = System::Drawing::Point(566, 27);
-			this->lbMovies->Name = L"lbMovies";
-			this->lbMovies->Size = System::Drawing::Size(105, 25);
-			this->lbMovies->TabIndex = 9;
-			this->lbMovies->Text = L"1. Movies";
-			// 
-			// lbScience
-			// 
-			this->lbScience->AutoSize = true;
-			this->lbScience->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->lbScience->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lbScience->Location = System::Drawing::Point(677, 28);
-			this->lbScience->Name = L"lbScience";
-			this->lbScience->Size = System::Drawing::Size(113, 25);
-			this->lbScience->TabIndex = 10;
-			this->lbScience->Text = L"2. Science";
-			// 
-			// lbHistory
-			// 
-			this->lbHistory->AutoSize = true;
-			this->lbHistory->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->lbHistory->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lbHistory->Location = System::Drawing::Point(796, 28);
-			this->lbHistory->Name = L"lbHistory";
-			this->lbHistory->Size = System::Drawing::Size(103, 25);
-			this->lbHistory->TabIndex = 11;
-			this->lbHistory->Text = L"3. History";
-			// 
-			// lbQuit
-			// 
-			this->lbQuit->AutoSize = true;
-			this->lbQuit->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->lbQuit->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lbQuit->Location = System::Drawing::Point(905, 28);
-			this->lbQuit->Name = L"lbQuit";
-			this->lbQuit->Size = System::Drawing::Size(75, 25);
-			this->lbQuit->TabIndex = 12;
-			this->lbQuit->Text = L"0. Quit";
 			// 
 			// EasyMode
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(999, 559);
-			this->Controls->Add(this->lbQuit);
-			this->Controls->Add(this->lbHistory);
-			this->Controls->Add(this->lbScience);
-			this->Controls->Add(this->lbMovies);
 			this->Controls->Add(this->btEnter);
 			this->Controls->Add(this->txtbxCategoryChooser);
 			this->Controls->Add(this->lbCategoryChooser);
@@ -278,20 +185,18 @@ namespace FirstApp {
 			this->Controls->Add(this->btChoice1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->lbQuestion);
-			this->MaximumSize = System::Drawing::Size(1015, 598);
-			this->MinimumSize = System::Drawing::Size(1015, 598);
 			this->Name = L"EasyMode";
 			this->Text = L"EasyMode";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
-
+#pragma endregion
 	// Declare a flag to track whether the text is intentionally cleared
 	private: bool isTextCleared = false;
 	private: static int CategorySelected = -1;
-#pragma endregion
 	private: System::Void txtbxCategoryChooser_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+
 		// Event handler for TextChanged event of the TextBox
 
 		// You can add validation if needed
@@ -311,7 +216,7 @@ namespace FirstApp {
 				else {
 					// Invalid difficulty range
 					// Example: Set a label to provide feedback
-					System::Windows::Forms::MessageBox::Show("Invalid Category. Please enter a value between 0 and 3.", "ERROR", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					System::Windows::Forms::MessageBox::Show("Invalid Category. Please enter a value between 1 and 3.", "ERROR", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				}
 			}
 			else {
@@ -320,24 +225,7 @@ namespace FirstApp {
 				System::Windows::Forms::MessageBox::Show("Invalid input. Please enter a numeric value.", "ERROR", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}
+
 	}
-    private: System::Void btEnter_Click(System::Object^ sender, System::EventArgs^ e) {
-		isTextCleared = true;  // Set the flag to indicate intentional clearing
-		this->txtbxCategoryChooser->Text = "";  // Set the Text property to an empty string
-		isTextCleared = false;  // Reset the flag after clearing the text
-    
-    	btChoice1->Text = "Pulp fiction";
-
-
-		// Debugging statement
-		//MessageBox::Show("Button text changed!");
-    
-    }
 };
 }
-
-/*
-isTextCleared = true;  // Set the flag to indicate intentional clearing
-	this->txtbxCategoryChooser->Text = "";  // Set the Text property to an empty string
-	isTextCleared = false;  // Reset the flag after clearing the text
-*/

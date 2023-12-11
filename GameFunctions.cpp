@@ -50,7 +50,7 @@ void wait_for_enter() {
 
 // Easy mode function
 void easy_mode() {
-    int answer= -1;
+    int answer;
     bool is_answer_correct = false;
     int category_count = 3;
     int category_chosen_count = 0;
