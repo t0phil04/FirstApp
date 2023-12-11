@@ -22,6 +22,11 @@ namespace FirstApp {
 			//TODO: Add the constructor code here
 			//
 		}
+		// Method to get the selected difficulty
+		static int GetSelectedDifficulty()
+		{
+			return DifficultySelected;
+		}
 
 	protected:
 		/// <summary>
@@ -152,8 +157,8 @@ namespace FirstApp {
 		}
 #pragma endregion
 		// Declare a flag to track whether the text is intentionally cleared
-private:
-	bool isTextCleared = false;
+	private: bool isTextCleared = false;
+	private: static int DifficultySelected = -1;
 
     private: System::Void txtbxDifficultyAnswer_TextChanged(System::Object^ sender, System::EventArgs^ e) {
     	// Event handler for TextChanged event of the TextBox
@@ -170,6 +175,7 @@ private:
     				// Valid difficulty range
     				// Example: Set a label to provide feedback
     				System::Windows::Forms::MessageBox::Show("Difficulty Selected: " + difficulty, "Difficulty Selected", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					DifficultySelected = difficulty;
     			}
     			else {
     				// Invalid difficulty range

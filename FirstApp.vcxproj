@@ -121,11 +121,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DifficultyForm.cpp" />
+    <ClCompile Include="EasyMode.cpp" />
     <ClCompile Include="GameFunctions.cpp" />
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DifficultyForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="EasyMode.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MainForm.h">
@@ -136,6 +140,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DifficultyForm.resx">
       <DependentUpon>DifficultyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EasyMode.resx">
+      <DependentUpon>EasyMode.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>

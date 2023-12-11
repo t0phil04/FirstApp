@@ -1,5 +1,7 @@
 #pragma once
 #include "DifficultyForm.h"  // Include the header file for your DifficultyForm
+#include "EasyMode.h"  // Include the header file for your DifficultyForm
+
 
 namespace FirstApp {
 
@@ -38,13 +40,15 @@ namespace FirstApp {
 	private: System::Windows::Forms::Button^ btInstructions;
 	private: System::Windows::Forms::Button^ btDifficultySelector;
 	private: System::Windows::Forms::Label^ lbWelcome;
+	private: System::Windows::Forms::Button^ btStartGame;
+
 	protected:
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -56,6 +60,7 @@ namespace FirstApp {
 			this->btInstructions = (gcnew System::Windows::Forms::Button());
 			this->btDifficultySelector = (gcnew System::Windows::Forms::Button());
 			this->lbWelcome = (gcnew System::Windows::Forms::Label());
+			this->btStartGame = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// btInstructions
@@ -98,11 +103,25 @@ namespace FirstApp {
 			this->lbWelcome->Text = L"Welcome to the Game Show!";
 			this->lbWelcome->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
+			// btStartGame
+			// 
+			this->btStartGame->BackColor = System::Drawing::SystemColors::ActiveCaption;
+			this->btStartGame->Font = (gcnew System::Drawing::Font(L"Rockwell", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btStartGame->Location = System::Drawing::Point(55, 354);
+			this->btStartGame->Name = L"btStartGame";
+			this->btStartGame->Size = System::Drawing::Size(448, 80);
+			this->btStartGame->TabIndex = 3;
+			this->btStartGame->Text = L"StartGame";
+			this->btStartGame->UseVisualStyleBackColor = false;
+			this->btStartGame->Click += gcnew System::EventHandler(this, &MainForm::btStartGame_Click);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(596, 393);
+			this->ClientSize = System::Drawing::Size(596, 463);
+			this->Controls->Add(this->btStartGame);
 			this->Controls->Add(this->lbWelcome);
 			this->Controls->Add(this->btDifficultySelector);
 			this->Controls->Add(this->btInstructions);
@@ -118,7 +137,7 @@ namespace FirstApp {
 		//System::Windows::Forms::MessageBox::Show("Your message goes here", "Title", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
 		System::Windows::Forms::MessageBox::Show(
-		"Instructions to the game are found below!\n\n"
+			"Instructions to the game are found below!\n\n"
 			"-----Easy Mode-----\n"
 			"This is simple, play the game with no consequences!\n"
 			"Sit back, relax, and enjoy the ride.\n"
@@ -138,44 +157,48 @@ namespace FirstApp {
 
 
 
-    private: System::Void btDifficultySelector_Click(System::Object^ sender, System::EventArgs^ e) {
-    	// Create an instance of DifficultyForm
-    	DifficultyForm^ difficultyForm = gcnew DifficultyForm();
-    
-    	// Show the DifficultyForm as a dialog (waits for it to be closed before continuing)
-    	System::Windows::Forms::DialogResult result = difficultyForm->ShowDialog();
-    /*
-    	// Check the result after the form is closed
-    	if (result == System::Windows::Forms::DialogResult::OK) {
-    		// The user clicked OK on the DifficultyForm
-    		int selectedDifficulty = difficultyForm->GetSelectedDifficulty();
-    
-    		// Now you can use the selected difficulty in your logic
-    		if (selectedDifficulty == 1) {
-    			// Easy difficulty
-    			cout << "\nYou have chosen the easy difficulty\n" << endl;
-    			wait_for_enter();
-    			clear();
-    			easy_mode();
-    		}
-    		else if (selectedDifficulty == 2) {
-    			// Medium difficulty
-    			cout << "\nYou have chosen the medium difficulty\n" << endl;
-    			wait_for_enter();
-    			clear();
-    			medium_mode();
-    		}
-    		else if (selectedDifficulty == 3) {
-    			// Hard difficulty
-    			cout << "\nYou have chosen the hard difficulty\n" << endl;
-    			wait_for_enter();
-    			clear();
-    			hard_mode();
-    		}
-    	}
-		*/
-    }
-	
+	private: System::Void btDifficultySelector_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Create an instance of DifficultyForm
+		DifficultyForm^ difficultyForm = gcnew DifficultyForm();
 
-};
-}
+		// Show the DifficultyForm as a dialog (waits for it to be closed before continuing)
+		System::Windows::Forms::DialogResult result = difficultyForm->ShowDialog();
+
+	}
+
+
+	private: System::Void btStartGame_Click(System::Object^ sender, System::EventArgs^ e) {
+			
+			int selectedDifficulty = DifficultyForm::GetSelectedDifficulty();
+
+			// Easy difficulty
+			if (selectedDifficulty == 1) {
+				// Create an instance of StartGameForm
+				EasyMode^ easyForm = gcnew EasyMode();
+				
+
+				wait_for_enter();
+				clear();
+				easy_mode();
+			}
+			/*
+			else if (selectedDifficulty == 2) {
+				// Medium difficulty
+
+				wait_for_enter();
+				clear();
+				medium_mode();
+			}
+			else if (selectedDifficulty == 3) {
+				// Hard difficulty
+
+				wait_for_enter();
+				clear();
+				hard_mode();
+			}
+			*/
+	}
+
+	};
+	}
+

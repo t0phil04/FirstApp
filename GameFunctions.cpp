@@ -48,39 +48,6 @@ void wait_for_enter() {
 }
 
 
-
-// Difficulty selection function
-void DifficultySelector() {
-    int difficulty = 0; // Sets initial difficulty to zero
-
-    cout << "Welcome to the quiz!\nPlease choose a difficulty by entering it's value:" << endl;
-    cout << "Easy = 1\nMedium = 2\nHard = 3\n";
-    cin >> difficulty;
-    // Nested if statements to run the associated difficulty functions.
-    // Easy difficulty
-    if (difficulty == 1) {
-        cout << "\nYou have chosen the easy difficulty\n" << endl;
-        wait_for_enter();
-        clear();
-        easy_mode();
-    }
-    // Medium difficulty
-    else if (difficulty == 2) {
-        cout << "\nYou have chosen the medium difficulty\n" << endl;
-        wait_for_enter();
-        clear();
-        medium_mode();
-    }
-    // Hard difficulty
-    else if (difficulty == 3) {
-        cout << "\nYou have chosen the hard difficulty\n" << endl;
-        wait_for_enter();
-        clear();
-        hard_mode();
-    }
-
-}
-
 // Easy mode function
 void easy_mode() {
     int answer;
